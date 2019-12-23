@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root 'home#index'
+  scope module: :app, as: 'app', constraints: { subdomain: 'roundabout' } do
+    root 'home#index'
+  end
+
+  match "*unmatched_route", to: 'link#show', via: :all
+  root to: "link#show", via: :all
 end
