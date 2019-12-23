@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development: &development
+  <<: *default
+  database: roundabout_development
+  username: postgres
+  password:
+  host: postgres
+  port: 5432
+
+test:
+  <<: *development
+  database: roundabout_test
+
+production:
+  <<: *default
+  database: roundabout_production
+  username: roundabout
+  password: <%= ENV['ROUNDABOUT_DATABASE_PASSWORD'] %>
